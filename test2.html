@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sanju Vashist - Computer Engineer Portfolio</title>
+    <style>
+      /* Root variables for consistent color scheme */
+:root {
+    --primary-color: #4169e1;
+    --secondary-color: #ff1493;
+    --accent-color: #ffd700;
+    --background-color: #000000;
+    --text-color: #ffffff;
+    --card-background: #1a1a1a;
+}
+
+/* Global Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+/* Header Styles */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: rgba(34, 34, 34, 0.8);
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+}
+
+.logo {
+    width: 50px;
+    height: 50px;
+}
+
+.menu-icon {
+    font-size: 24px;
+    cursor: pointer;
+    display: none;
+}
+
+.nav-bar {
+    display: flex;
+}
+
+.nav-bar a {
+    color: var(--text-color);
+    text-decoration: none;
+    padding: 10px 15px;
+}
+
+.enroll-btn {
+    background-color: transparent;
+    border: 2px solid var(--secondary-color);
+    color: var(--secondary-color);
+    padding: 10px 20px;
+    border-radius: 25px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.enroll-btn:hover {
+    background-color: var(--secondary-color);
+    color: var(--background-color);
+}
+
+/* Main Content Styles */
+.main-content {
+    text-align: center;
+    padding: 100px 20px 40px;
+    position: relative;
+}
+
+.background-lines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    opacity: 0.5;
+}
+
+.background-lines::before,
+.background-lines::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: var(--primary-color);
+}
+
+.background-lines::before {
+    top: 20%;
+    left: -0px;
+    transform: rotate(-5deg);
+}
+
+.background-lines::after {
+    bottom: 30%;
+    right: -0px;
+    transform: rotate(5deg);
+}
+
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+.highlight {
+    background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Info Box Styles */
+.info-box {
+    background-color: var(--card-background);
+    border-radius: 10px;
+    padding: 20px;
+    margin: 40px auto;
+    max-width: 800px;
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.info-item {
+    text-align: left;
+}
+
+.divider {
+    width: 1px;
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.program-duration {
+    text-align: left;
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    padding-top: 20px;
+}
+
+.futuristic-text {
+    margin-top: 40px;
+}
+
+/* Feature Card Styles */
+.section-2, .section-3 {
+    padding: 40px 20px;
+}
+
+.feature-card {
+    display: flex;
+    background-color: var(--card-background);
+    border-radius: 15px;
+    overflow: hidden;
+    margin-bottom: 40px;
+}
+
+.image-container {
+    flex: 1;
+    padding: 10px;
+}
+
+.image-container img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.features-list {
+    flex: 1;
+    padding: 20px;
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.feature-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.feature-item.active {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.icon {
+    width: 40px;
+    height: 40px;
+    background-color: var(--accent-color);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 15px;
+    font-size: 18px;
+}
+
+.chat-icon {
+    margin-left: auto;
+    background-color: var(--primary-color);
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Project Button Styles */
+.project-btn {
+    display: none;
+    background-color: var(--accent-color);
+    color: var(--background-color);
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 0.9em;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.project-btn:hover {
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+}
+
+.feature-item.active .project-btn {
+    display: inline-block;
+}
+/* Experience and Skills Sections */
+
+.experience, .skills {
+    padding: 40px 20px;
+}
+
+.title {
+    font-size: 2.5em;
+    text-align: center;
+    margin-bottom: 20px;
+    background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.experience-card, .skills-grid {
+    background-color: var(--card-background);
+    border-radius: 10px;
+    padding: 20px;
+    margin: 0 auto;
+    max-width: 800px;
+}
+
+.alert {
+    background-color: var(--accent-color);
+    color: var(--background-color);
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.experience-table {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.experience-table th, .experience-table td {
+    text-align: left;
+    padding: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+}
+
+.skill {
+    text-align: center;
+}
+
+.skill-icon {
+    font-size: 2em;
+    margin-bottom: 10px;
+    color: var(--accent-color);
+}
+
+.contact-form {
+    background-color: var(--card-background);
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.form-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    flex: 0 0 48%;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: var(--accent-color);
+}
+
+input, textarea {
+    width: 100%;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--accent-color);
+    border-radius: 5px;
+    color: var(--text-color);
+}
+
+textarea {
+    height: 100px;
+    resize: vertical;
+}
+
+button[type="submit"] {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    color: var(--text-color);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: opacity 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    opacity: 0.8;
+}
+
+.footer {
+    background-color: var(--card-background);
+    padding: 20px;
+    text-align: center;
+    margin-top: 40px;
+}
+
+.social-media {
+    margin-bottom: 20px;
+}
+
+.social-media span {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 1.2em;
+    color: var(--accent-color);
+}
+
+.social-media a {
+    display: inline-block;
+    margin: 0 10px;
+    color: var(--text-color);
+    font-size: 1.5em;
+    transition: color 0.3s ease;
+}
+
+.social-media a:hover {
+    color: var(--accent-color);
+}
+
+.copyright {
+    font-size: 0.9em;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.copyright a {
+    color: var(--accent-color);
+    text-decoration: none;
+}
+
+@media (max-width: 768px) {
+    .menu-icon {
+        display: block;
+    }
+
+    .nav-bar {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        right: 0;
+        background-color: rgba(34, 34, 34, 0.9);
+    }
+
+    .nav-bar.active {
+        display: flex;
+    }
+
+    .nav-bar a {
+        padding: 15px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .feature-card {
+        flex-direction: column;
+    }
+
+    .section-3 .image-container {
+        display: none; /* Hide second image on smaller screens */
+    }
+
+    .image-container, .features-list {
+        width: 100%;
+    }
+
+    .form-row {
+        flex-direction: column;
+    }
+
+    .form-group {
+        flex: 0 0 100%;
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 2em;
+    }
+
+    .info-row {
+        flex-direction: column;
+    }
+
+    .divider {
+        display: none;
+    }
+
+    .info-item {
+        margin-bottom: 20px;
+    }
+
+    .skills-grid {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    }
+}
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+</head>
+<body>
+  <!-- Header Section -->
+  <div class="header">
+      <div class="menu-icon" onclick="toggleNav()">☰</div>
+      <img src="logo.png" alt="Logo" class="logo">
+      <div class="nav-bar" id="nav">
+          <a href="#home">Home</a>
+          <a href="#services">Overview</a>
+          <a href="#experience">Experience</a>
+          <a href="#skills">Skills</a>
+          <a href="#contact">Contact</a>
+      </div>
+      <a href="#" class="enroll-btn">Project</a>
+  </div>
+
+  <!-- Main Content Section -->
+  <div class="main-content" id="home">
+      <div class="background-lines"></div>
+      <h1>Sanju Vashist</h1>
+      <h1 class="highlight">Computer Engineer</h1>
+      <div class="info-box">
+          <div class="info-row">
+              <div class="info-item">
+                  <h3>Experience</h3>
+                  <p>5+ Years</p>
+              </div>
+              <div class="divider"></div>
+              <div class="info-item">
+                  <h3>Projects Completed</h3>
+                  <p>50+</p>
+              </div>
+          </div>
+          <div class="program-duration">
+              <h3>Specializations</h3>
+              <p>Web Development, Mobile Apps, AI/ML</p>
+          </div>
+      </div>
+      <a href="#contact" class="enroll-btn">CONTACT NOW</a>
+      <div class="futuristic-text">
+          <h2>Innovative Solutions</h2>
+          <h2 class="highlight">Empowering Technology</h2>
+      </div>
+  </div>
+
+  <!-- About Section -->
+  <div class="section-2" id="about">
+      <div class="feature-card">
+          <div class="image-container">
+              <img id="featureImage" src="/p1.png" alt="Featured skill">
+          </div>
+          <div class="features-list">
+              <div class="feature-item" data-image="/p2.png">
+                  <div class="icon">💻</div>
+                  <p>Full-Stack Development</p>
+                  <a href="project1.html" class="project-btn">View Project</a>
+              </div>
+              <div class="feature-item" data-image="/p3.png">
+                  <div class="icon">📱</div>
+                  <p>Mobile App Development</p>
+                  <a href="project2.html" class="project-btn">View Project</a>
+              </div>
+              <div class="feature-item active" data-image="/p4.png">
+                  <div class="icon">🤖</div>
+                  <p>AI/ML Integration</p>
+                  <a href="project3.html" class="project-btn">View Project</a>
+              </div>
+          </div>
+      </div>
+  </div>
+
+  <!-- Services Section -->
+  <div class="section-3" id="services">
+      <div class="feature-card">
+          <div class="features-list">
+              <div class="feature-item" data-image="/p5.png">
+                  <div class="icon">🚀</div>
+                  <p>Performance Optimization</p>
+                  <a href="project4.html" class="project-btn">View Project</a>
+              </div>
+              <div class="feature-item" data-image="pextra.png">
+                  <div class="icon">🔒</div>
+                  <p>Cybersecurity Solutions</p>
+                  <a href="project5.html" class="project-btn">View Project</a>
+              </div>
+              <div class="feature-item active" data-image="/plast.png">
+                  <div class="icon">☁️</div>
+                  <p>Cloud Computing</p>
+                  <a href="project6.html" class="project-btn">View Project</a>
+              </div>
+          </div>
+          <div class="image-container">
+              <img id="featureImage2" src="/p1.png" alt="Featured service">
+          </div>
+      </div>
+  </div>
+
+  <!-- Experience Section -->
+  <section class="experience" id="experience">
+      <h1 class="title">Experience</h1>
+      <div class="experience-card">
+        <div class="alert">Highlights</div>
+        <h2 class="company">Tech Innovators Inc.</h2>
+        <h3 class="position">Senior Software Engineer</h3>
+        <table class="experience-table">
+          <tr>
+            <th>Duration</th>
+            <th>Key Achievements</th>
+          </tr>
+          <tr>
+            <td>2018 - Present</td>
+            <td>
+              <ul>
+                <li>Led development of award-winning mobile app</li>
+                <li>Implemented AI-driven analytics platform</li>
+                <li>Mentored junior developers, improving team productivity by 30%</li>
+              </ul>
+            </td>
+          </tr>
+        </table>
+      </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section class="skills" id="skills">
+      <h1 class="title">Skills</h1>
+      <p class="subtitle">Expertise in cutting-edge technologies and methodologies</p>
+      
+      <div class="skills-grid">
+          <div class="skill">
+              <div class="skill-icon"><i class="fas fa-code"></i></div>
+              <p>Web Development</p>
+          </div>
+          <div class="skill">
+              <div class="skill-icon"><i class="fas fa-mobile-alt"></i></div>
+              <p>Mobile App Development</p>
+          </div>
+          <div class="skill">
+              <div class="skill-icon"><i class="fas fa-brain"></i></div>
+              <p>Machine Learning</p>
+          </div>
+          <div class="skill">
+              <div class="skill-icon"><i class="fas fa-cloud"></i></div>
+              <p>Cloud Computing</p>
+          </div>
+      </div>
+      
+      <a href="#" class="enroll-btn">Download Full Resume</a>
+  </section>
+
+  <!-- Contact Section -->
+  <div class="container" id="contact">
+      <div class="contact-form">
+          <h1>Contact Me</h1>
+          <form action="process_form.php" method="POST">
+              <div class="form-row">
+                  <div class="form-group">
+                      <label for="name">Name *</label>
+                      <input type="text" id="name" name="name" placeholder="Enter Your Full Name" required>
+                  </div>
+                  <div class="form-group">
+                      <label for="email">Email *</label>
+                      <input type="email" id="email" name="email" placeholder="Enter Email Address" required>
+                  </div>
+              </div>
+              <div class="form-row">
+                  <div class="form-group">
+                      <label for="phone">Phone Number *</label>
+                      <input type="tel" id="phone" name="phone" placeholder="Enter Phone Number" required>
+                  </div>
+                  <div class="form-group">
+                      <label for="message">Message</label>
+                      <textarea id="message" name="message" placeholder="Type your message here..."></textarea>
+                  </div>
+              </div>
+              <button type="submit" class="enroll-btn">SUBMIT</button>
+          </form>
+      </div>
+  </div>
+  
+  <!-- Footer Section -->
+  <footer class="footer">
+      <div class="social-media">
+          <span>Follow me</span>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#"><i class="fab fa-github"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+      </div>
+      <div class="copyright">
+          <p>COPYRIGHT © 2024 SANJU VASHIST. ALL RIGHTS RESERVED</p>
+          <a href="#">Privacy Policy</a> &amp; <a href="#">Terms and Conditions</a>
+      </div>
+  </footer>
+
+<script>
+
+  
+  function toggleNav() {
+    var nav = document.getElementById("nav");
+    nav.classList.toggle("active");
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    
+  // Feature item click handler
+  const featureItems = document.querySelectorAll('.feature-item');
+    const featureImage = document.getElementById('featureImage');
+    const featureImage2 = document.getElementById('featureImage2');
+
+    featureItems.forEach(item => {
+        item.addEventListener('click', function() {
+            // Remove active class from all items
+            featureItems.forEach(i => {
+                i.classList.remove('active');
+                i.querySelector('.project-btn').style.display = 'none';
+            });
+
+            // Add active class to clicked item
+            this.classList.add('active');
+            this.querySelector('.project-btn').style.display = 'inline-block';
+
+            // Change the images
+            const newImageSrc = this.getAttribute('data-image');
+            if (featureImage) featureImage.src = newImageSrc;
+            if (featureImage2) featureImage2.src = newImageSrc;
+        });
+    });
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+
+    // Add animation to skills section
+    const skillsSection = document.querySelector('.skills');
+    const skillItems = document.querySelectorAll('.skill');
+
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                skillItems.forEach((item, index) => {
+                    setTimeout(() => {
+                        item.style.opacity = '1';
+                        item.style.transform = 'translateY(0)';
+                    }, index * 100);
+                });
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    if (skillsSection) {
+        observer.observe(skillsSection);
+    }
+
+    
+});
+</script>
+</body>
+</html>

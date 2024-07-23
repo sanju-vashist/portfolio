@@ -1,0 +1,460 @@
+/* Root variables for consistent color scheme */
+:root {
+    --primary-color: #4169e1;
+    --secondary-color: #ff1493;
+    --accent-color: #ffd700;
+    --background-color: #000000;
+    --text-color: #ffffff;
+    --card-background: #1a1a1a;
+}
+
+/* Global Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+/* Header Styles */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: rgba(34, 34, 34, 0.8);
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+}
+
+.logo {
+    width: 50px;
+    height: 50px;
+}
+
+.menu-icon {
+    font-size: 24px;
+    cursor: pointer;
+    display: none;
+}
+
+.nav-bar {
+    display: flex;
+}
+
+.nav-bar a {
+    color: var(--text-color);
+    text-decoration: none;
+    padding: 10px 15px;
+    transition: color 0.3s ease;
+}
+
+.nav-bar a:hover {
+    color: var(--accent-color);
+}
+
+.enroll-btn {
+    background-color: transparent;
+    border: 2px solid var(--secondary-color);
+    color: var(--secondary-color);
+    padding: 10px 20px;
+    border-radius: 25px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.enroll-btn:hover {
+    background-color: var(--secondary-color);
+    color: var(--background-color);
+}
+
+/* Main Content Styles */
+.main-content {
+    text-align: center;
+    padding: 100px 20px 40px;
+    position: relative;
+}
+
+.background-lines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    opacity: 0.5;
+}
+
+.background-lines::before,
+.background-lines::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: var(--primary-color);
+}
+
+.background-lines::before {
+    top: 20%;
+    left: -0px;
+    transform: rotate(-5deg);
+}
+
+.background-lines::after {
+    bottom: 30%;
+    right: -0px;
+    transform: rotate(5deg);
+}
+
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+.highlight {
+    background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Info Box Styles */
+.info-box {
+    background-color: var(--card-background);
+    border-radius: 10px;
+    padding: 20px;
+    margin: 40px auto;
+    max-width: 800px;
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.info-item {
+    text-align: left;
+}
+
+.divider {
+    width: 1px;
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.program-duration {
+    text-align: left;
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    padding-top: 20px;
+}
+
+.futuristic-text {
+    margin-top: 40px;
+}
+
+/* Feature Card Styles */
+.section-2, .section-3 {
+    padding: 40px 20px;
+}
+
+.feature-card {
+    display: flex;
+    background-color: var(--card-background);
+    border-radius: 15px;
+    overflow: hidden;
+    margin-bottom: 40px;
+}
+
+.image-container {
+    flex: 1;
+    padding: 10px;
+}
+
+.image-container img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.features-list {
+    flex: 1;
+    padding: 20px;
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.feature-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.feature-item.active {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.icon {
+    width: 40px;
+    height: 40px;
+    background-color: var(--accent-color);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 15px;
+    font-size: 18px;
+}
+
+/* Project Button Styles */
+.project-btn {
+    display: none;
+    margin-left: auto;
+    background-color: var(--accent-color);
+    color: var(--background-color);
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 0.9em;
+    transition: background-color 0.3s ease;
+}
+
+.project-btn:hover {
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+}
+
+.feature-item.active .project-btn {
+    display: inline-block;
+}
+
+/* Experience and Skills Sections */
+.experience, .skills {
+    padding: 40px 20px;
+}
+
+.title {
+    font-size: 2.5em;
+    text-align: center;
+    margin-bottom: 20px;
+    background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.experience-card, .skills-grid {
+    background-color: var(--card-background);
+    border-radius: 10px;
+    padding: 20px;
+    margin: 0 auto;
+    max-width: 800px;
+}
+
+.alert {
+    background-color: var(--accent-color);
+    color: var(--background-color);
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.experience-table {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.experience-table th, .experience-table td {
+    text-align: left;
+    padding: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+}
+
+.skill {
+    text-align: center;
+}
+
+.skill-icon {
+    font-size: 2em;
+    margin-bottom: 10px;
+    color: var(--accent-color);
+}
+
+/* Contact Form Styles */
+.contact-form {
+    background-color: var(--card-background);
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.form-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    flex: 0 0 48%;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: var(--accent-color);
+}
+
+input, textarea {
+    width: 100%;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--accent-color);
+    border-radius: 5px;
+    color: var(--text-color);
+}
+
+textarea {
+    height: 100px;
+    resize: vertical;
+}
+
+button[type="submit"] {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    color: var(--text-color);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: opacity 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    opacity: 0.8;
+}
+
+/* Footer Styles */
+.footer {
+    background-color: var(--card-background);
+    padding: 20px;
+    text-align: center;
+    margin-top: 40px;
+}
+
+.social-media {
+    margin-bottom: 20px;
+}
+
+.social-media span {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 1.2em;
+    color: var(--accent-color);
+}
+
+.social-media a {
+    display: inline-block;
+    margin: 0 10px;
+    color: var(--text-color);
+    font-size: 1.5em;
+    transition: color 0.3s ease;
+}
+
+.social-media a:hover {
+    color: var(--accent-color);
+}
+
+.copyright {
+    font-size: 0.9em;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.copyright a {
+    color: var(--accent-color);
+    text-decoration: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .menu-icon {
+        display: block;
+    }
+
+    .nav-bar {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        right: 0;
+        background-color: rgba(34, 34, 34, 0.9);
+    }
+
+    .nav-bar.active {
+        display: flex;
+    }
+
+    .nav-bar a {
+        padding: 15px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .feature-card {
+        flex-direction: column;
+    }
+
+    .section-3 .image-container {
+        display: none; /* Hide second image on smaller screens */
+    }
+
+    .image-container, .features-list {
+        width: 100%;
+    }
+
+    .form-row {
+        flex-direction: column;
+    }
+
+    .form-group {
+        flex: 0 0 100%;
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 2em;
+    }
+
+    .info-row {
+        flex-direction: column;
+    }
+
+    .divider {
+        display: none;
+    }
+
+    .info-item {
+        margin-bottom: 20px;
+    }
+
+    .skills-grid {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    }
+}

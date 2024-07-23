@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Portfolio Vault</title>
+    <style>
+        :root {
+            --primary-color: #4CAF50;
+            --secondary-color: #45a049;
+            --background-color: #1a1a1a;
+            --box-background: #2a2a2a;
+            --text-color: #f0f0f0;
+            --border-color: #3a3a3a;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+        #accessButton {
+            background-color: var(--primary-color);
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        #accessButton:hover {
+            background-color: var(--secondary-color);
+        }
+        #passwordPrompt {
+            display: none;
+            margin-top: 20px;
+        }
+        #passwordInput {
+            padding: 10px;
+            margin-right: 10px;
+            border: 1px solid var(--border-color);
+            background-color: var(--box-background);
+            color: var(--text-color);
+        }
+        #secureArea {
+            display: none;
+            margin-top: 20px;
+        }
+        .dataBox {
+            background-color: var(--box-background);
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: box-shadow 0.3s ease;
+        }
+        .dataBox:hover {
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+        .dataBox h3 {
+            margin-top: 0;
+            color: var(--primary-color);
+        }
+        textarea, input[type="text"], input[type="url"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: var(--box-background);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            resize: vertical;
+        }
+        button {
+            background-color: var(--primary-color);
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            margin: 4px 2px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: var(--secondary-color);
+        }
+        #toggleTheme {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: transparent;
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+        }
+        .light-theme {
+            --primary-color: #4CAF50;
+            --secondary-color: #45a049;
+            --background-color: #f0f0f0;
+            --box-background: #ffffff;
+            --text-color: #333333;
+            --border-color: #cccccc;
+        }
+        #fileUpload {
+            display: none;
+        }
+        #uploadLabel {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: var(--primary-color);
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        #uploadLabel:hover {
+            background-color: var(--secondary-color);
+        }
+        #fileList {
+            list-style-type: none;
+            padding: 0;
+        }
+        #fileList li {
+            margin-bottom: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        #fileList li button {
+            background-color: #ff4444;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        #searchInput {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: var(--box-background);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+        }
+        #listItems {
+            list-style-type: none;
+            padding: 0;
+        }
+        #listItems li {
+            background-color: var(--box-background);
+            border: 1px solid var(--border-color);
+            margin-bottom: 5px;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        #listItems li button {
+            background-color: #ff4444;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <button id="toggleTheme" onclick="toggleTheme()">Toggle Theme</button>
+    <button id="accessButton" onclick="showPasswordPrompt()">Access Secure Vault</button>
+
+    <div id="passwordPrompt">
+        <input type="password" id="passwordInput" placeholder="Enter password">
+        <button onclick="checkPassword()">Submit</button>
+    </div>
+
+    <div id="secureArea">
+        <h2>Secure Portfolio Vault</h2>
+        
+        <input type="text" id="searchInput" placeholder="Search across all sections..." oninput="searchContent()">
+
+
+        <div class="dataBox">
+            <h3>Custom List</h3>
+            <input type="text" id="listItemInput" placeholder="Enter a list item">
+            <button onclick="addListItem()">Add Item</button>
+            <ul id="listItems"></ul>
+        </div>
+
+        <div class="dataBox">
+            <h3>Personal Notes</h3>
+            <textarea id="personalNotes" rows="4" placeholder="Enter your personal notes here"></textarea>
+            <button onclick="saveData('personalNotes')">Save</button>
+            <button onclick="deleteData('personalNotes')">Delete</button>
+        </div>
+
+        <div class="dataBox">
+            <h3>Contact Information</h3>
+            <input type="text" id="contactInfo" placeholder="Enter contact information">
+            <button onclick="saveData('contactInfo')">Save</button>
+            <button onclick="deleteData('contactInfo')">Delete</button>
+        </div>
+
+        <div class="dataBox">
+            <h3>Important Links</h3>
+            <textarea id="importantLinks" rows="4" placeholder="Enter important links (one per line)"></textarea>
+            <button onclick="saveData('importantLinks')">Save</button>
+            <button onclick="deleteData('importantLinks')">Delete</button>
+        </div>
+
+        <div class="dataBox">
+            <h3>To-Do List</h3>
+            <textarea id="todoList" rows="4" placeholder="Enter tasks (one per line)"></textarea>
+            <button onclick="saveData('todoList')">Save</button>
+            <button onclick="deleteData('todoList')">Delete</button>
+        </div>
+
+        <div class="dataBox">
+            <h3>File Storage</h3>
+            <label for="fileUpload" id="uploadLabel">Choose File</label>
+            <input type="file" id="fileUpload" onchange="handleFileUpload()">
+            <ul id="fileList"></ul>
+        </div>
+
+        <div class="dataBox">
+            <h3>Encrypted Message</h3>
+            <textarea id="messageToEncrypt" rows="4" placeholder="Enter a message to encrypt"></textarea>
+            <button onclick="encryptMessage()">Encrypt</button>
+            <textarea id="encryptedMessage" rows="4" placeholder="Encrypted message will appear here" readonly></textarea>
+            <button onclick="decryptMessage()">Decrypt</button>
+        </div>
+
+        
+    </div>
+
+    <script>
+        function showPasswordPrompt() {
+            document.getElementById('passwordPrompt').style.display = 'block';
+        }
+
+        function checkPassword() {
+            const password = document.getElementById('passwordInput').value;
+            if (password === '1234') {
+                document.getElementById('passwordPrompt').style.display = 'none';
+                document.getElementById('secureArea').style.display = 'block';
+                loadAllData();
+            } else {
+                alert('Incorrect password');
+            }
+        }
+
+        function saveData(id) {
+            const data = document.getElementById(id).value;
+            localStorage.setItem(id, data);
+            alert('Data saved');
+        }
+
+        function deleteData(id) {
+            document.getElementById(id).value = '';
+            localStorage.removeItem(id);
+            alert('Data deleted');
+        }
+
+        function loadAllData() {
+            const ids = ['personalNotes', 'contactInfo', 'importantLinks', 'todoList'];
+            ids.forEach(id => {
+                const savedData = localStorage.getItem(id);
+                if (savedData) {
+                    document.getElementById(id).value = savedData;
+                }
+            });
+            loadFileList();
+            loadList();
+        }
+
+        function toggleTheme() {
+            document.body.classList.toggle('light-theme');
+        }
+
+        function handleFileUpload() {
+            const fileInput = document.getElementById('fileUpload');
+            const file = fileInput.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const fileData = {
+                        name: file.name,
+                        type: file.type,
+                        content: e.target.result
+                    };
+                    const fileList = JSON.parse(localStorage.getItem('fileList') || '[]');
+                    fileList.push(fileData);
+                    localStorage.setItem('fileList', JSON.stringify(fileList));
+                    loadFileList();
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function loadFileList() {
+            const fileList = JSON.parse(localStorage.getItem('fileList') || '[]');
+            const fileListElement = document.getElementById('fileList');
+            fileListElement.innerHTML = '';
+            fileList.forEach((file, index) => {
+                const li = document.createElement('li');
+                li.innerHTML = `
+                    <span>${file.name}</span>
+                    <button onclick="downloadFile(${index})">Download</button>
+                    <button onclick="removeFile(${index})">Remove</button>
+                `;
+                fileListElement.appendChild(li);
+            });
+        }
+
+        function downloadFile(index) {
+            const fileList = JSON.parse(localStorage.getItem('fileList') || '[]');
+            const file = fileList[index];
+            const link = document.createElement('a');
+            link.href = file.content;
+            link.download = file.name;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        function removeFile(index) {
+            const fileList = JSON.parse(localStorage.getItem('fileList') || '[]');
+            fileList.splice(index, 1);
+            localStorage.setItem('fileList', JSON.stringify(fileList));
+            loadFileList();
+        }
+
+        function searchContent() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const ids = ['personalNotes', 'contactInfo', 'importantLinks', 'todoList'];
+            ids.forEach(id => {
+                const element = document.getElementById(id);
+                const content = element.value.toLowerCase();
+                if (content.includes(searchTerm)) {
+                    element.style.backgroundColor = 'rgba(76, 175, 80, 0.2)';
+                } else {
+                    element.style.backgroundColor = '';
+                }
+            });
+        }
+
+        function encryptMessage() {
+            const message = document.getElementById('messageToEncrypt').value;
+            const encryptedMessage = btoa(unescape(encodeURIComponent(message)));
+            document.getElementById('encryptedMessage').value = encryptedMessage;
+        }
+
+        function decryptMessage() {
+            const encryptedMessage = document.getElementById('encryptedMessage').value;
+            try {
+                const decryptedMessage = decodeURIComponent(escape(atob(encryptedMessage)));
+                document.getElementById('messageToEncrypt').value = decryptedMessage;
+            } catch (e) {
+                alert('Invalid encrypted message');
+            }
+        }
+
+        function addListItem() {
+            const input = document.getElementById('listItemInput');
+            const text = input.value.trim();
+            if (text) {
+                const list = document.getElementById('listItems');
+                const li = document.createElement('li');
+                li.innerHTML = `
+                    <span>${text}</span>
+                    <button onclick="removeListItem(this)">Remove</button>
+                `;
+                list.appendChild(li);
+                input.value = '';
+                saveList();
+            }
+        }
+
+        function removeListItem(button) {
+            button.parentElement.remove();
+            saveList();
+        }
+
+        function saveList() {
+            const items = Array.from(document.getElementById('listItems').children).map(li => li.firstElementChild.textContent);
+            localStorage.setItem('customList', JSON.stringify(items));
+        }
+
+        function loadList() {
+            const items = JSON.parse(localStorage.getItem('customList') || '[]');
+            const list = document.getElementById('listItems');
+            list.innerHTML = '';
+            items.forEach(item => {
+                const li = document.createElement('li');
+                li.innerHTML = `
+                    <span>${item}</span>
+                    <button onclick="removeListItem(this)">Remove</button>
+                `;
+                list.appendChild(li);
+            });
+        }
+    </script>
+</body>
+</html>
